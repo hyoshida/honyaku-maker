@@ -11,6 +11,36 @@ ul
         | =>
       = translation.destination
 
+#honyaku
+  iframe width="100%" height="800px"
+
+  = javascript_include_tag 'https://rawgit.com/padolsey/jquery.fn/master/cross-domain-ajax/jquery.xdomainajax.js'
+
+  javascript:
+    translations = #{raw @dictionary.translations.map { |t| [t.source, t.destination] }};
+    target_url = '#{params[:url]}';
+
+  coffee:
+    $(document).ready(->
+      $.get(target_url, (data) ->
+        text = data.responseText
+        $(translations).each(->
+          source = new RegExp(this[0], 'g')
+          destination = this[1]
+          text = text.replace(source, destination)
+        )
+        iframe = $('#honyaku > iframe')[0]
+        doc = iframe.document || iframe.contentDocument || iframe.contentWindow.document
+        doc.open()
+        doc.writeln('<base href="' + url_base(target_url) + '">' + text)
+        doc.close()
+      )
+    )
+
+    url_base = (url) ->
+      element = document.createElement('a')
+      element.href = url
+      element.protocol + '//' + element.host
 
 = link_to 'Edit', edit_dictionary_path(@dictionary)
 '|
