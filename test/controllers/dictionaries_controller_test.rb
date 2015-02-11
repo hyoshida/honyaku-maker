@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class DictionariesControllerTest < ActionController::TestCase
+  def valid_params
+    FactoryGirl.attributes_for(:dictionary)
+  end
+
   setup do
-    @dictionary = dictionaries(:one)
+    @dictionary = FactoryGirl.create(:dictionary)
   end
 
   test "should get index" do
@@ -18,7 +22,7 @@ class DictionariesControllerTest < ActionController::TestCase
 
   test "should create dictionary" do
     assert_difference('Dictionary.count') do
-      post :create, dictionary: {  }
+      post :create, dictionary: valid_params
     end
 
     assert_redirected_to dictionary_path(assigns(:dictionary))
@@ -35,7 +39,7 @@ class DictionariesControllerTest < ActionController::TestCase
   end
 
   test "should update dictionary" do
-    patch :update, id: @dictionary, dictionary: {  }
+    patch :update, id: @dictionary, dictionary: valid_params
     assert_redirected_to dictionary_path(assigns(:dictionary))
   end
 

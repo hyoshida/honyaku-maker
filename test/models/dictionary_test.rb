@@ -6,6 +6,7 @@ class DictionaryTest < ActiveSupport::TestCase
   should have_many(:translations).inverse_of(:dictionary)
 
   should validate_presence_of(:title)
-  should validate_presence_of(:permalink)
-  should validate_uniqueness_of(:permalink)
+  # Comment out, because generate a unique permalink automatically.
+  # should validate_presence_of(:permalink)
+  # should validate_uniqueness_of(:permalink)
 end
