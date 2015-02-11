@@ -1,5 +1,16 @@
 p#notice = notice
 
+h1
+  = @dictionary.title
+
+ul
+  - @dictionary.translations.each do |translation|
+    li
+      = translation.source
+      span<>
+        | =>
+      = translation.destination
+
 
 = link_to 'Edit', edit_dictionary_path(@dictionary)
 '|
