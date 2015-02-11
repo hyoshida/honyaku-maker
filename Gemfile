@@ -47,4 +47,7 @@ end
 
 group :test do
   gem 'shoulda'
+
+  # Dress up minitest output
+  gem 'minitest-reporters'
 end
