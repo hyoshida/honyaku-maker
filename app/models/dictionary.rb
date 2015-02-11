@@ -8,6 +8,10 @@ class Dictionary < ActiveRecord::Base
 
   before_validation :generate_permalink, on: :create
 
+  def to_param
+    permalink
+  end
+
   private
 
   def generate_permalink

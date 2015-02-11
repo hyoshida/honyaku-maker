@@ -29,23 +29,23 @@ class DictionariesControllerTest < ActionController::TestCase
   end
 
   test "should show dictionary" do
-    get :show, id: @dictionary
+    get :show, permalink: @dictionary.to_param
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @dictionary
+    get :edit, permalink: @dictionary.to_param
     assert_response :success
   end
 
   test "should update dictionary" do
-    patch :update, id: @dictionary, dictionary: valid_params
+    patch :update, permalink: @dictionary.to_param, dictionary: valid_params
     assert_redirected_to dictionary_path(assigns(:dictionary))
   end
 
   test "should destroy dictionary" do
     assert_difference('Dictionary.count', -1) do
-      delete :destroy, id: @dictionary
+      delete :destroy, permalink: @dictionary.to_param
     end
 
     assert_redirected_to dictionaries_path

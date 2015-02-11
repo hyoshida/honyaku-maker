@@ -67,7 +67,7 @@ class DictionariesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_dictionary
-    @dictionary = Dictionary.find(params[:id])
+    @dictionary = Dictionary.find_by!(permalink: params[:permalink])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
